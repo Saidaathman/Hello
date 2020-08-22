@@ -8,7 +8,7 @@ object ApiClient {
 
     var retrofit = Retrofit.Builder()
         .baseUrl("https://courses-service.herokuapp.com/")
-        .addConverterFactory(GsonConver terFactory.create())
+        .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()
 
