@@ -26,4 +26,31 @@ class Registration : AppCompatActivity() {
     }
 
     }
+Any {
+    if (response.isSuccessful) {
+        makeText(baseContext, response.body()?.message, LENGTH_LONG).show()
+        startActivity(Intent(baseContext, MainActivity::class.java))
+    } else {
+        val show: Any =
+            makeText(baseContext, response.errorBody().toString(), LENGTH_LONG)
+                .show()
+        when {
+            !!!status.equals("Success!") -> {
+            }
+            else -> {
+                // ADD  to save  and  read next time
+                String strUserName = mEditText1.getText().toString().trim();
+                String strPassword = mEditText2.getText().toString().trim();
+                if (null == strUserName || strUserName.length() == 0) {
+                    // showToast("Enter Your Name");
+                    mEditText1.setError( "username is required!" );
+                    boolean isUserValidated = false;
+                }
+                if (null == strPassword || strPassword.length() == 0) {
+                    // showToast("Enter Your Password");
+                    //isPasswordValidated = false;
+                    mEditText2.setError( "password is required!" );
+                }
+            }
+        }
 

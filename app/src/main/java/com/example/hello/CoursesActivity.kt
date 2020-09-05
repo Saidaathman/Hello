@@ -3,14 +3,45 @@
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.hello.Database.HelloDatabase
 import kotlinx.android.synthetic.main.row_courses_item.*
  data class Courses(val course_id: Int, val course_name: String, val course_code: Int, val instructor:String, val description:String)
 
 
  class CoursesActivity : AppCompatActivity() {
+     lateinit var database: HelloDatabase
      override fun onCreate(savedInstanceState: Bundle?) {
          super.onCreate(savedInstanceState)
          setContentView(R.layout.activity_courses)
+         database = Room.databaseBuilder(baseContext, HelloDatabase::class.java, "hello-db").build()
+         fetchCourses()
+         override fun onResponse(call: Call<CoursesResponse>, response: Response<CoursesResponse>) {
+             if (response.isSuccessful) {
+                 var courseList = response.body()?.courses as List<Course>
+                 Thread {
+                     courseList.forEach { course ->
+                         database.courseDao().insertCourse(course)
+                     }
+                 }.start()
+
+                 displayCourses(courseList)
+             } else {
+                 Toast.makeText(baseContext, response.errorBody().toString(), Toast.LENGTH_LONG)
+                     .show()
+             }
+         }
+     }
+ }
+         fun fetchCoursesFromDatabase(){
+             Thread{
+                 val courses = database.courseDao().getAllCourses()
+
+                 runOnUiThread {
+                     displayCourses(courses)
+                 }
+             }.start()
+         }
+
 
          rvCourses.layoutManager = LinearLayoutManager(baseContext)
          val coursesRecyclerViewAdapter = CoursesRecyclerViewAdapter(coursesList = listOf(

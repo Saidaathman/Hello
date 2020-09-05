@@ -15,6 +15,9 @@ class SplashActivity : AppCompatActivity() {
         if (accessToken.isNullOrEmpty()) {
             val intent = Intent(baseContext, MainActivity::class.java)
             startActivity(intent)
+
+
+
         } else {
             val intent = Intent(baseContext, CoursesActivity::class.java)
             startActivity(intent)
