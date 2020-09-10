@@ -3,7 +3,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.hello.Course
+import models.Course
 import ke.co.hello.models.Course
 import retrofit2.http.Query
 

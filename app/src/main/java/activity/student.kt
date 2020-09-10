@@ -1,4 +1,4 @@
-package com.example.hello
+package activity
 
 import com.google.gson.annotations.SerializedName
 

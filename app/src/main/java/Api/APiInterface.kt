@@ -1,4 +1,6 @@
-package com.example.hello
+package Api
+import models.CoursesResponse
+import models.loginResponse
 import ke.co.hello.RegistrationResponse
 
 import okhttp3.RequestBody
@@ -7,7 +9,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
-import com.example.hello.RegistrationResponse as RegistrationResponse
+import models.RegistrationResponse as RegistrationResponse
 
 
 interface ApiInterface {

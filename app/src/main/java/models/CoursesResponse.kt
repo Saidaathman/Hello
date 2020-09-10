@@ -1,4 +1,5 @@
-package com.example.hello
+package models
+import activity.Courses
 import com.google.gson.annotations.SerializedName
 
 
